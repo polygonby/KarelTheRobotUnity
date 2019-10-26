@@ -4,19 +4,10 @@ using UnityEngine;
 
 namespace KarelTheRobotUnity.Core
 {
-    public class ExecutionController : MonoBehaviour
+    public class AsyncExecutionController : MonoBehaviour
     {
-        public Field Field { get; private set; }
-        public List<Robot> Robots { get; private set; }
-
-        private Queue<IAsyncAction> _actions = new Queue<IAsyncAction>();
+        private readonly Queue<IAsyncAction> _actions = new Queue<IAsyncAction>();
         private IAsyncAction _currentAction;
-
-        private void Awake()
-        {
-            Field = FindObjectOfType<Field>();
-            Robots = FindObjectsOfType<Robot>().ToList();
-        }
 
         private void Update()
         {

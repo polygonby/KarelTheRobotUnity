@@ -1,26 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using KarelTheRobotUnity.Core;
-using UnityEngine;
+﻿using KarelTheRobotUnity.Core;
 
-public class Lesson01 : MonoBehaviour
+public class Lesson01 : SyncActionSceneController
 {
-    private void Start()
+    protected override void Program()
     {
-        var robot = FindObjectOfType<Robot>();
-        var executor = FindObjectOfType<ExecutionController>();
-        
-        var move = new AsyncRobotMoveAction(robot);
-        var rotateLeft = new AsyncRobotTurnAction(robot, AsyncRobotTurnAction.RotationDirection.Left);
-        var rotateRight = new AsyncRobotTurnAction(robot, AsyncRobotTurnAction.RotationDirection.Right);
-        
-        executor.AddAction(move);
-        executor.AddAction(rotateRight);
-        executor.AddAction(move);
-        executor.AddAction(move);
-        executor.AddAction(rotateLeft);
-        executor.AddAction(move);
-        
-        executor.Execute();
+        Move();
+        TurnLeft();
+        Move();
+        Move();
+        TurnRight();
+        Move();
     }
 }
