@@ -19,14 +19,21 @@ namespace KarelTheRobotUnity.Core
         [SerializeField]
         private AsyncExecutionController _executionController = null;
         [SerializeField]
-        private List<Robot> _asyncRobots = null;
+        private List<Robot> _robots = null;
         [SerializeField]
         private Field _field = null;
 
         private void Awake()
         {
-            foreach (var robot in _asyncRobots)
+            var settings = MainSettings.Instance;
+
+            Time.timeScale = settings.StartTimeScale;
+            
+            foreach (var robot in _robots)
             {
+                robot.MoveSpeed = settings.RobotMoveSpeed;
+                robot.RotationSpeed = settings.RobotRotationSpeed;
+                
                 Robots.Add(new RobotSyncActionWrapper(robot, _executionController));
             }
         }
@@ -89,7 +96,7 @@ namespace KarelTheRobotUnity.Core
             var robots = FindObjectsOfType<Robot>().ToList();
             if (robots.Count == 0) 
                 Debug.Log("ResolveControllerDependencies: No robots presented on current scene");
-            ReflectionUtils.FindAndSetPrivateField(baseType, "_asyncRobots", controller, robots);
+            ReflectionUtils.FindAndSetPrivateField(baseType, "_robots", controller, robots);
         }
     }
 #endif    

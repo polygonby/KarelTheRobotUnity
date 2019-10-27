@@ -29,7 +29,7 @@ namespace KarelTheRobotUnity.Core
         public override void Update(float deltaTime)
         {
             var fullRotationAngle =
-                (_direction == RotationDirection.Left ? -1.0f : 1.0f) * Robot.TurnSpeed * deltaTime;
+                (_direction == RotationDirection.Left ? -1.0f : 1.0f) * Robot.RotationSpeed * deltaTime;
             var remainingRotationAngle = Quaternion.Angle(Robot.transform.rotation, _targetRobotRotation);
 
             if (Mathf.Abs(remainingRotationAngle) < Mathf.Abs(fullRotationAngle))
