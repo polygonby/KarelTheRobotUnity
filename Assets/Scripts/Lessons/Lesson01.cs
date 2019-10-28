@@ -1,14 +1,18 @@
 ﻿using KarelTheRobotUnity.Core;
+using UnityEngine;
 
-public class Lesson01 : SyncActionSceneController
+namespace TestNamespace
 {
-    protected override void Program()
+    public class Lesson01 : SyncActionSceneController
     {
-        Move();
-        TurnLeft();
-        Move();
-        Move();
-        TurnRight();
-        Move();
+        protected override void Program()
+        {
+            Move();
+            TurnLeft();
+            Move();
+            Move();
+            TurnRight();
+            Move();
+        }
     }
 }

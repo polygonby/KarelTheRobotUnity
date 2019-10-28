@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -11,11 +12,16 @@ namespace KarelTheRobotUnity.Core
     public class Field : MonoBehaviour
     {
         public Vector2Int Size => _size;
-
-        private List<Cell> _cells;
         
         [SerializeField]
         private Vector2Int _size = new Vector2Int(8, 8);
+        [SerializeField]
+        private List<Cell> _cells = null;
+
+        public Cell GetCell(Vector2Int coordinates)
+        {
+            return GetCell(coordinates.x, coordinates.y);
+        }
         
         public Cell GetCell(int x, int y)
         {
@@ -25,6 +31,15 @@ namespace KarelTheRobotUnity.Core
             if (_cells == null) PopulateCellsList();
             
             return _cells[x * Size.y + y];
+        }
+
+        public Vector2Int GetCellCoordinates(Cell cell)
+        {
+            int cellIndex = _cells.IndexOf(cell);
+            if (cellIndex == -1)
+                throw new ArgumentException("Specified cell does not belong to field");
+
+            return new Vector2Int(cellIndex / _size.x, cellIndex % _size.x);
         }
 
         private void PopulateCellsList()
@@ -75,6 +90,9 @@ namespace KarelTheRobotUnity.Core
                         cell.transform.position = new Vector3(positionX, 0.0f, positionY);
                     }    
                 }
+
+                field.GetType().GetMethod("PopulateCellsList", BindingFlags.Instance | BindingFlags.NonPublic)
+                    .Invoke(field, null);
             }
         }
     }
