@@ -25,13 +25,17 @@ namespace KarelTheRobotUnity.Core
 
         public void Move()
         {
-            if (GetFrontCell().IsClear())
+            var frontCell = GetFrontCell();
+            
+            if (frontCell != null && frontCell.IsClear())
             {
+                Position = _field.GetCellCoordinates(frontCell);
                 _executionController.AddAction(new AsyncRobotMoveAction(AsyncRobot));
             }
-            else
+            else if (frontCell != null)
             {
-                
+                _executionController.AddAction(new CellBlockedAsyncErrorAction(frontCell));
+                Debug.Log("Cell is blocked but presented");
             }
         }
 

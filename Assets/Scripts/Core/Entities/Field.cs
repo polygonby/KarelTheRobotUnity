@@ -39,7 +39,7 @@ namespace KarelTheRobotUnity.Core
             if (cellIndex == -1)
                 throw new ArgumentException("Specified cell does not belong to field");
 
-            return new Vector2Int(cellIndex / _size.x, cellIndex % _size.x);
+            return new Vector2Int(cellIndex / _size.y, cellIndex % _size.y);
         }
 
         private void PopulateCellsList()
@@ -51,7 +51,7 @@ namespace KarelTheRobotUnity.Core
             _cells.Sort((x, y) =>
             {
                 int compareXResult = x.transform.position.x.CompareTo(y.transform.position.x);
-                return compareXResult == 0 ? x.transform.position.y.CompareTo(y.transform.position.y) : compareXResult;
+                return compareXResult == 0 ? x.transform.position.z.CompareTo(y.transform.position.z) : compareXResult;
             });
         }
     }

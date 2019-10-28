@@ -8,11 +8,14 @@ namespace TestNamespace
         protected override void Program()
         {
             Move();
-            TurnLeft();
             Move();
             Move();
-            TurnRight();
-            Move();
+            
+//            TurnLeft();
+//            Move();
+//            Move();
+//            TurnRight();
+//            Move();
         }
     }
 }

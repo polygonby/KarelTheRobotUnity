@@ -8,7 +8,8 @@ public static class ReflectionUtils
             System.Reflection.BindingFlags.Instance | 
             System.Reflection.BindingFlags.NonPublic);
         
-        if (fieldInfo == null) throw new ArgumentException($"Field {fieldName} has not been found in type {targetType}");
+        if (fieldInfo == null) 
+            throw new ArgumentException($"Field {fieldName} has not been found in type {targetType}");
         
         fieldInfo.SetValue(target, value);
     }
@@ -17,6 +18,7 @@ public static class ReflectionUtils
     {
         if (type == typeof(object)) 
             throw new ArgumentException($"Type {targetType} has not been found in inheritance hierarchy");
+        
         if (type == targetType) return type;
         
         return GetTypeFromInheritanceHierarchy(type.BaseType, targetType);

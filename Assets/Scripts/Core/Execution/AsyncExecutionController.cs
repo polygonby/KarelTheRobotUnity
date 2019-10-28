@@ -35,7 +35,12 @@ namespace KarelTheRobotUnity.Core
         private void ExecuteNextAction(IAsyncAction action)
         {
             _currentAction = action;
-            _currentAction.EventActionFinished += OnActionFinished;
+            
+            if (!(_currentAction is IAsyncErrorAction))
+            {
+                _currentAction.EventActionFinished += OnActionFinished;
+            }
+            
             _currentAction.Run();
         }
 

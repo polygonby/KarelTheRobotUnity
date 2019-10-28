@@ -8,8 +8,8 @@ namespace KarelTheRobotUnity.Core
 {
     public class Cell : MonoBehaviour
     {
-        private Beeper _beeper;
-        private Wall _wall;
+        private Beeper _beeper = null;
+        private Wall _wall = null;
 
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace KarelTheRobotUnity.Core
 
         public bool IsClear()
         {
-            return _wall;
+            return _wall == null;
         }
 
         public bool IsNotClear()
