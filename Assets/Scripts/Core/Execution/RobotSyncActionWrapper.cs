@@ -10,6 +10,8 @@ namespace KarelTheRobotUnity.Core
         
         public readonly Robot AsyncRobot;
         
+        public bool IsErrorOccured { get; private set; }
+        
         private readonly AsyncExecutionController _executionController;
         private readonly Field _field;
         
@@ -25,6 +27,8 @@ namespace KarelTheRobotUnity.Core
 
         public void Move()
         {
+            if (IsErrorOccured) return;
+            
             var frontCell = GetFrontCell();
             
             if (frontCell != null && frontCell.IsClear())
@@ -34,6 +38,7 @@ namespace KarelTheRobotUnity.Core
             }
             else if (frontCell != null)
             {
+                IsErrorOccured = true;
                 _executionController.AddAction(new CellBlockedAsyncErrorAction(frontCell));
                 Debug.Log("Cell is blocked but presented");
             }
@@ -41,12 +46,16 @@ namespace KarelTheRobotUnity.Core
 
         public void TurnLeft()
         {
+            if (IsErrorOccured) return;
+            
             Rotation = Rotation.GetLeft();
             _executionController.AddAction(new AsyncRobotTurnAction(AsyncRobot, AsyncRobotTurnAction.RotationDirection.Left));
         }
         
         public void TurnRight()
         {
+            if (IsErrorOccured) return;
+            
             Rotation = Rotation.GetRight();
             _executionController.AddAction(new AsyncRobotTurnAction(AsyncRobot, AsyncRobotTurnAction.RotationDirection.Right));
         }
