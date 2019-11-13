@@ -82,6 +82,16 @@ namespace KarelTheRobotUnity.Core
         {
             MainRobot.TurnRight();
         }
+
+        public void TakeBeeper()
+        {
+            MainRobot.TakeBeeper();
+        }
+
+        public void PutBeeper()
+        {
+            MainRobot.PutBeeper();
+        }
     }
 
 #if UNITY_EDITOR

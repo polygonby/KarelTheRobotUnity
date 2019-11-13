@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace KarelTheRobotUnity.Core
 {
@@ -33,8 +34,7 @@ namespace KarelTheRobotUnity.Core
 
         public static Direction GetRight(this Direction _this)
         {
-            if (_this == Direction.Undefined)
-                throw new ArgumentException($"Cannot get right from {_this} direction");
+            Assert.IsFalse(_this == Direction.Undefined, $"Cannot get right from {_this} direction");
 
             int newDirection = (int)_this + 1;
             
@@ -46,8 +46,7 @@ namespace KarelTheRobotUnity.Core
         
         public static Direction GetLeft(this Direction _this)
         {
-            if (_this == Direction.Undefined)
-                throw new ArgumentException($"Cannot get right from {_this} direction");
+            Assert.IsFalse(_this == Direction.Undefined, $"Cannot get left from {_this} direction");
 
             int newDirection = (int)_this - 1;
             
@@ -59,8 +58,7 @@ namespace KarelTheRobotUnity.Core
         
         public static Direction GetBack(this Direction _this)
         {
-            if (_this == Direction.Undefined)
-                throw new ArgumentException($"Cannot get right from {_this} direction");
+            Assert.IsFalse(_this == Direction.Undefined, $"Cannot get back from {_this} direction");
 
             int newDirection = (int)_this + 2;
             

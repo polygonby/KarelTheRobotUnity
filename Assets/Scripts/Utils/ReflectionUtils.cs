@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Assertions;
 
 public static class ReflectionUtils
 {
@@ -8,16 +9,15 @@ public static class ReflectionUtils
             System.Reflection.BindingFlags.Instance | 
             System.Reflection.BindingFlags.NonPublic);
         
-        if (fieldInfo == null) 
-            throw new ArgumentException($"Field {fieldName} has not been found in type {targetType}");
+        Assert.IsNotNull(fieldInfo, $"Field {fieldName} has not been found in type {targetType}");
         
         fieldInfo.SetValue(target, value);
     }
     
     public static Type GetTypeFromInheritanceHierarchy(Type type, Type targetType)
     {
-        if (type == typeof(object)) 
-            throw new ArgumentException($"Type {targetType} has not been found in inheritance hierarchy");
+        Assert.IsFalse(type == typeof(object),
+            $"Type {targetType} has not been found in inheritance hierarchy");
         
         if (type == targetType) return type;
         
@@ -30,8 +30,8 @@ public static class ReflectionUtils
             System.Reflection.BindingFlags.Instance | 
             System.Reflection.BindingFlags.NonPublic);
         
-        if (fieldInfo == null) 
-            throw new ArgumentException($"Field {fieldName} has not been found in type {targetType}");
+        Assert.IsFalse(fieldInfo == null,
+            $"Field {fieldName} has not been found in type {targetType}");
 
         object value = fieldInfo.GetValue(target);
         

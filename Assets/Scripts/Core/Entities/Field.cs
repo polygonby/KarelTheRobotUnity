@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Assertions;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -25,8 +25,8 @@ namespace KarelTheRobotUnity.Core
         
         public Cell GetCell(int x, int y)
         {
-            if (x < 0 || x >= Size.x) throw new ArgumentOutOfRangeException("x is out of range");
-            if (y < 0 || y >= Size.y) throw new ArgumentOutOfRangeException("y is out of range");
+            Assert.IsFalse(x < 0 || x >= Size.x, "x is out of range");
+            Assert.IsFalse(y < 0 || y >= Size.y, "y is out of range");
 
             if (_cells == null) PopulateCellsList();
             
@@ -36,8 +36,7 @@ namespace KarelTheRobotUnity.Core
         public Vector2Int GetCellCoordinates(Cell cell)
         {
             int cellIndex = _cells.IndexOf(cell);
-            if (cellIndex == -1)
-                throw new ArgumentException("Specified cell does not belong to field");
+            Assert.IsFalse(cellIndex == -1, "Specified cell does not belong to the field");
 
             return new Vector2Int(cellIndex / _size.y, cellIndex % _size.y);
         }
@@ -46,7 +45,7 @@ namespace KarelTheRobotUnity.Core
         {
             _cells = GetComponentsInChildren<Cell>().ToList();
             
-            if (_cells.Count != Size.x * Size.y) throw new Exception("Wrong number of cells in field");
+            Assert.IsFalse(_cells.Count != Size.x * Size.y, "Wrong number of cells in field");
             
             _cells.Sort((x, y) =>
             {

@@ -7,6 +7,7 @@ namespace KarelTheRobotUnity.Core
     {
         public Vector2Int Position { get; private set; }
         public Direction Rotation { get; private set; }
+        public bool IsBeeperOnBoard { get; private set; }
         
         public readonly Robot AsyncRobot;
         
@@ -39,8 +40,7 @@ namespace KarelTheRobotUnity.Core
             else if (frontCell != null)
             {
                 IsErrorOccured = true;
-                _executionController.AddAction(new CellBlockedAsyncErrorAction(frontCell));
-                Debug.Log("Cell is blocked but presented");
+                _executionController.AddAction(new AsyncCellBlockedErrorAction(frontCell));
             }
         }
 
@@ -58,6 +58,47 @@ namespace KarelTheRobotUnity.Core
             
             Rotation = Rotation.GetRight();
             _executionController.AddAction(new AsyncRobotTurnAction(AsyncRobot, AsyncRobotTurnAction.RotationDirection.Right));
+        }
+
+        public void TakeBeeper()
+        {
+            if (IsErrorOccured) return;
+
+            var currentCell = GetCurrentCell();
+            var beeper = currentCell.GetBeeper();
+            if (beeper != null)
+            {
+                IsBeeperOnBoard = true;
+                _executionController.AddAction(new AsyncRobotTakeBeeperAction(beeper, AsyncRobot));
+            }
+            else
+            {
+                IsErrorOccured = true;
+                _executionController.AddAction(new AsyncRobotNoBeeperErrorAction(AsyncRobot, currentCell));
+            }
+        }
+
+        public void PutBeeper()
+        {
+            if (IsErrorOccured) return;
+
+            var currentCell = GetCurrentCell();
+            
+            if (IsBeeperOnBoard)
+            {
+                _executionController.AddAction(new AsyncRobotPutBeeperAction(currentCell, AsyncRobot));
+            }
+            else
+            {
+                Debug.Log("NO");
+                IsErrorOccured = true;
+                _executionController.AddAction(new AsyncRobotNoBeeperErrorAction(AsyncRobot, currentCell));
+            }
+        }
+
+        public Cell GetCurrentCell()
+        {
+            return _field.GetCell(Position);
         }
 
         public Cell GetFrontCell()

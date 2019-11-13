@@ -1,5 +1,5 @@
-using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class SingletonScriptableObject<T> : ScriptableObject where T: SingletonScriptableObject<T>
 {
@@ -10,9 +10,10 @@ public class SingletonScriptableObject<T> : ScriptableObject where T: SingletonS
             if (s_instance == null)
             {
                 var instances = Resources.FindObjectsOfTypeAll<T>();
-                if (instances.Length == 0) 
-                    throw new Exception($"No SingletonScriptableObject instances " +
-                                        $"of type {typeof(T)} is presented in Resources");
+                
+                Assert.IsFalse(instances.Length == 0, 
+                    $"No SingletonScriptableObject instances of type {typeof(T)} is presented in Resources");
+                
                 s_instance = instances[0];
             }
 

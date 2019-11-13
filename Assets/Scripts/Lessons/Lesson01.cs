@@ -1,5 +1,6 @@
 ﻿using KarelTheRobotUnity.Core;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace TestNamespace
 {
@@ -9,13 +10,17 @@ namespace TestNamespace
         {
             Move();
             Move();
+            TakeBeeper();
             Move();
             
-//            TurnLeft();
-//            Move();
-//            Move();
-//            TurnRight();
-//            Move();
+            TurnLeft();
+            TurnLeft();
+            Move();
+            Move();
+            TurnRight();
+            Move();
+            PutBeeper();
+            Move();
         }
     }
 }
