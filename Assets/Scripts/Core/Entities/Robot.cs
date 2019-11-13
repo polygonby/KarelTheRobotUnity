@@ -13,7 +13,7 @@ namespace KarelTheRobotUnity.Core
         [SerializeField]
         private float _armsTravellingDistance = 0.2f;
         [SerializeField]
-        private float _armsMovingSpeed = 2.0f;
+        private float _armsMovingSpeed = 0.2f;
         
         public float MoveSpeed { get; set; } = 1.0f; // In units per second
         public float RotationSpeed { get; set; } = 90.0f; // In degrees per second
