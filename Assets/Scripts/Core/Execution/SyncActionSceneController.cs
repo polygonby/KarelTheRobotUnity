@@ -33,7 +33,7 @@ namespace KarelTheRobotUnity.Core
         private MainSettings _mainSettings = null;
         #pragma warning restore 0414
         [SerializeField]
-        private AsyncExecutionController _executionController = null;
+        protected AsyncExecutionController _executionController = null;
         [SerializeField]
         private List<RobotInfo> _robots = null;
         [SerializeField]

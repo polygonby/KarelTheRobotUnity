@@ -3,9 +3,9 @@
 public class LightBlinker : MonoBehaviour
 {
     [SerializeField]
-    private Light _light;
+    private Light _light = null;
     [SerializeField]
-    private AnimationCurve _blinkSequenceCurve;
+    private AnimationCurve _blinkSequenceCurve = null;
 
     private float _fullLightIntensity;
     private float _sequenceLength;
