@@ -26,5 +26,7 @@ namespace KarelTheRobotUnity.Core
         public Wall MainWallPrefab;
         [SerializeField]
         public Beeper MainBeeperPrefab;
+        [SerializeField]
+        public Material TargetCellMaterial;
     }
 }

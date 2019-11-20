@@ -92,6 +92,11 @@ namespace KarelTheRobotUnity.Core
         {
             MainRobot.PutBeeper();
         }
+
+        public Direction GetCurrentRotation()
+        {
+            return MainRobot.Rotation;
+        }
     }
 
 #if UNITY_EDITOR

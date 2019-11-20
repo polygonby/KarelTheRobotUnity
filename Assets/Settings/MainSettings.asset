@@ -23,3 +23,4 @@ MonoBehaviour:
     type: 3}
   MainBeeperPrefab: {fileID: 2109719844005451785, guid: c9f5dff2b01104cd88dbcc74e449c537,
     type: 3}
+  TargetCellMaterial: {fileID: 2100000, guid: a2214f80c1e4a4718a2b2be3138b78a8, type: 2}
