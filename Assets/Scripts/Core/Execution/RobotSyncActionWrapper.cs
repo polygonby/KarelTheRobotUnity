@@ -151,5 +151,11 @@ namespace KarelTheRobotUnity.Core
             
             return _field.GetCell(nearCellCoordinates);
         }
+
+        internal void SetRotationImmediately(Direction direction)
+        {
+            Rotation = direction;
+            AsyncRobot.transform.rotation = Rotation.ToRotationWorldSpace();
+        }
     }
 }
