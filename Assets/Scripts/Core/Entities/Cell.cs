@@ -8,18 +8,9 @@ namespace KarelTheRobotUnity.Core
 {
     public class Cell : MonoBehaviour
     {
-        private Beeper _beeper = null;
-        private Wall _wall = null;
-
-        private void Awake()
-        {
-            _beeper = GetComponentInChildren<Beeper>();
-            _wall = GetComponentInChildren<Wall>();
-        }
-
         public Beeper GetBeeper()
         {
-            return _beeper;
+            return GetComponentInChildren<Beeper>();
         }
         
         public bool IsBeeperPresented()
@@ -34,7 +25,7 @@ namespace KarelTheRobotUnity.Core
 
         public bool IsClear()
         {
-            return _wall == null;
+            return GetComponentInChildren<Wall>() == null;
         }
 
         public bool IsNotClear()
