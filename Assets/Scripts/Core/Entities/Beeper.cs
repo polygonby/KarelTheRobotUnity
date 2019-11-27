@@ -1,21 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace KarelTheRobotUnity.Core
 {
     public class Beeper : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public Vector2Int Position { get; set; }
 
+        [SerializeField]
+        private LightBlinker _lightBlinker = null;
+
+        public void SetColor(Color color)
+        {
+            _lightBlinker.SetLightColor(color);
+
+            foreach (var material in GetComponentsInChildren<Renderer>().Select(r => r.material))
+            {
+                material.color = color;
+            }
         }
 
-        // Update is called once per frame
-        void Update()
+        public Color GetColor()
         {
-
+            return _lightBlinker.GetLightColor();
         }
     }
 }

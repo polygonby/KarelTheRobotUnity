@@ -29,4 +29,14 @@ public class LightBlinker : MonoBehaviour
             _currentSequenceTime %= _sequenceLength;
         }
     }
+
+    public void SetLightColor(Color color)
+    {
+        _light.color = color;
+    }
+
+    public Color GetLightColor()
+    {
+        return _light.color;
+    }
 }
