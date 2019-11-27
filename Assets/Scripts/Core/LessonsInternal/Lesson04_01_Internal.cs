@@ -40,6 +40,7 @@ namespace KarelTheRobotUnity.Core
                     {
                         var cell = field.GetCell(randomizedCoordinates);
                         var beeper = Instantiate(MainSettings.Instance.MainBeeperPrefab, cell.transform);
+                        cell.IsBeeperPresentedSync = true;
                         emptyCellUsed = true;
                     }
                 }

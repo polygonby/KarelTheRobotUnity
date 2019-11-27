@@ -8,6 +8,13 @@ namespace KarelTheRobotUnity.Core
 {
     public class Cell : MonoBehaviour
     {
+        public bool IsBeeperPresentedSync { get; set; } // Used for sync logic
+
+        private void Awake()
+        {
+            IsBeeperPresentedSync = IsBeeperPresented();
+        }
+
         public Beeper GetBeeper()
         {
             return GetComponentInChildren<Beeper>();

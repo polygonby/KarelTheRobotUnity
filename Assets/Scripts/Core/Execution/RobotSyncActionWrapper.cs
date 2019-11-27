@@ -65,10 +65,11 @@ namespace KarelTheRobotUnity.Core
             if (IsErrorOccured) return;
 
             var currentCell = GetCurrentCell();
-            var beeper = currentCell.GetBeeper();
-            if (beeper != null)
+            if (currentCell.IsBeeperPresentedSync)
             {
                 IsBeeperOnBoard = true;
+                currentCell.IsBeeperPresentedSync = false;
+                var beeper = currentCell.GetBeeper();
                 _executionController.AddAction(new AsyncRobotTakeBeeperAction(beeper, AsyncRobot));
             }
             else
@@ -84,13 +85,13 @@ namespace KarelTheRobotUnity.Core
 
             var currentCell = GetCurrentCell();
             
-            if (IsBeeperOnBoard)
+            if (IsBeeperOnBoard && !currentCell.IsBeeperPresentedSync)
             {
                 _executionController.AddAction(new AsyncRobotPutBeeperAction(currentCell, AsyncRobot));
+                currentCell.IsBeeperPresentedSync = true;
             }
             else
             {
-                Debug.Log("NO");
                 IsErrorOccured = true;
                 _executionController.AddAction(new AsyncRobotNoBeeperErrorAction(AsyncRobot, currentCell));
             }
