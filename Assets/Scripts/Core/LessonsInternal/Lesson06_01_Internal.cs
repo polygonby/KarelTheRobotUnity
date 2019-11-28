@@ -32,12 +32,14 @@ namespace KarelTheRobotUnity.Core
         {
             _deliveredBeepersType = BeeperType.Red;
             Execute();
+            _executionController.Execute();
         }
 
         public void OnDeliverBlueBeepersButtonClick()
         {
             _deliveredBeepersType = BeeperType.Blue;
             Execute();
+            _executionController.Execute();
         }
 
         protected abstract void Execute();
